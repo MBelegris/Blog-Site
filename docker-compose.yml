@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  api-server:
+    image: api-server
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-app
+    depends_on:
+      - mongo
+    container_name: "api-server"
+
+  mongo:
+    image: mongo
+    networks:
+      - mern-app
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    container_name: "mongo"
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  mern-app:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
