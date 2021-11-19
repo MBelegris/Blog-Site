@@ -5,7 +5,7 @@ services:
     image: api-server
     restart: always
     ports:
-      - "3000:3000"
+      - "5000:5000"
     networks:
       - mern-app
     depends_on:
@@ -23,6 +23,18 @@ services:
     container_name: "mongo"
     volumes:
       - mongo-data:/data/db
+
+  react-app:
+    image: react-app
+    stdin_open: true
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - mern-app
+    depends_on:
+      - api-server
+    container_name: "react-app"
 
 networks:
   mern-app:
