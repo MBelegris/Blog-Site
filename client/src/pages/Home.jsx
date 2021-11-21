@@ -7,7 +7,7 @@ class home extends Component {
         return(
             <div style={{
                 display: 'flex',
-                justifyContent: 'Right',
+                justifyContent: 'Left',
                 alignItems: 'Right',
                 height: '100vh'
             }}>
