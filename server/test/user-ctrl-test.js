@@ -1,5 +1,3 @@
-//const assert = require("assert");
-//const mongoose = require('mongoose');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
@@ -9,7 +7,6 @@ const expect = chai.expect;
 let test_id;
 
 const User = require('../models/user-model');
-//const userCtrl = require('../controllers/user-ctrl');
 
 describe('Testing the user CRUD', function () {
 
@@ -44,7 +41,7 @@ describe('Testing the user CRUD', function () {
     });
 
     //Test user creation
-    it('should create a user in the db', function (done){
+    it('should be valid if it can create a user in the db', function (done){
 
         var user = new User({
             name: "Test-user",
@@ -66,7 +63,7 @@ describe('Testing the user CRUD', function () {
     });
 
     //test the get all users function
-    it('should get back all the users from the db', function (done){
+    it('should be valid if it can get back all the users from the db', function (done){
         chai.request('http://localhost:5000/api/users')
             .get('/')
             .then(function (res,err) {
@@ -91,7 +88,7 @@ describe('Testing the user CRUD', function () {
     });
 
     //test update user
-    it('should update user', function (done) {
+    it('should be valid if it can update user', function (done) {
         var user = new User({
             name: "New-test User",
             username: "test-username",
@@ -112,7 +109,7 @@ describe('Testing the user CRUD', function () {
     });
 
     //test delete user by id
-    it('should delete user by id', function (done) {
+    it('should be valid if it can delete user by id', function (done) {
         chai.request(`http://localhost:5000/api/user/${test_id}`)
             .delete('/')
             .then(function (res, err) {
@@ -123,9 +120,3 @@ describe('Testing the user CRUD', function () {
         })
     });
 });
-
-
-/** To test
- * 1. Update User
- * 2. Delete User
- */
