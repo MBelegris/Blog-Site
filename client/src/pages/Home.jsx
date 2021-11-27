@@ -17,8 +17,6 @@ class home extends Component {
                         </button>
                     </Link>
                 </div>
-                <br/>
-
             </div>
         );
     }

@@ -77,6 +77,20 @@ getUserById = async (req, res) => {
     }).catch(err => console.log(err));
 }
 
+getUserByUsernamePwd = async (req, res) => {
+    await User.findOne({ username: req.params.username, password: req.params.password }, (err, user) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err });
+        }
+
+        if (!user) {
+            return res.status(404).json({ success: false, error: `User not found` });
+        }
+        console.log(`${user}`)
+        return res.status(200).json({ success: true, data: user });
+    }).catch(err => console.log(err));
+}
+
 getUsers = async (req, res) => {
     await User.find({}, (err, users) => {
         if (err) {
@@ -94,5 +108,6 @@ module.exports = {
     updateUser,
     deleteUser,
     getUsers,
-    getUserById
+    getUserById,
+    getUserByUsernamePwd
 }

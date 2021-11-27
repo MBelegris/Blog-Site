@@ -12,7 +12,6 @@ class register extends Component {
             phone: "",
             username: "",
             password: "",
-            confirm_password: ""
         }
     }
 
