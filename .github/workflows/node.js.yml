@@ -29,6 +29,14 @@ jobs:
     - name: Npm install
       working-directory: ./server
       run: npm install
+    - name: Docker Build Server
+      working-directory: ./server
+      run: docker build -t "api-server" .
+    - name: Docker Build Front-End
+      working-directory: ./client
+      run: docker build -t "react-app" .
+    - name: Docker Compose Up
+      run: docker compose up
     - name: Npm test
       working-directory: ./server
       run: npm run test
