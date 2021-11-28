@@ -8,7 +8,7 @@ import {Home, About, Register, CreatePost, Login} from "../pages";
 function App() {
     return (
         <Router>
-            <NavBar/>
+            <NavBar logged_in = {sessionStorage.getItem("logged-in") }/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/about" element={<About/>}/>
