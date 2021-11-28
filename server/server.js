@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const logger = require('./Logger');
 
 const app = express();
 
@@ -22,5 +23,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', postRouter, userRouter);
+
+logger.info(`Node server starting`);
+logger.info(`App listening on port: ${port}`);
 
 app.listen(port, () => console.log(`App listening on port: ${port}`));
