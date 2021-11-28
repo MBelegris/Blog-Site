@@ -26,7 +26,7 @@ class Login extends Component{
 
         await apis.getUser(username, password)
             .then(res => {
-                //JSON.stringify(res.data.data.{id, username, pwd})
+                //(res.data.data.{id, username, pwd})
 
                 sessionStorage.setItem("logged-in", "True");
                 sessionStorage.setItem("id", res.data.data._id);

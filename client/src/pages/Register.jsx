@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import apis from "../api/api";
+import {Link} from "react-router-dom";
 //import styled from "styled-components";
 
 class register extends Component {
@@ -50,7 +51,7 @@ class register extends Component {
                 password: ""
                 }
             );
-        })
+        });
     }
 
     render() {
@@ -74,6 +75,9 @@ class register extends Component {
                 <input type="text" placeholder="pwd" onChange={this.handleChangePassword}/>
                 <br/>
                 <button onClick={this.handleCreateUser}>Register</button>
+                <br/>
+                <br/>
+                <Link to="/login" className="btn btn-primary">Sign In</Link>
             </div>
         );
     }
