@@ -8,7 +8,6 @@ class Login extends Component{
         this.state = {
             username: "",
             password: "",
-            user: ""
         }
     }
 
@@ -23,12 +22,18 @@ class Login extends Component{
     }
 
     handleCheckUser = async () => {
-        const {username, password, user} = this.state;
+        let {username, password} = this.state;
 
         await apis.getUser(username, password)
             .then(res => {
-                this.setState(user, res.data.user);
-                console.log(`${user}`);
+                //JSON.stringify(res.data.data.{id, username, pwd})
+
+                sessionStorage.setItem("logged-in", "True");
+                sessionStorage.setItem("id", res.data.data._id);
+                sessionStorage.setItem("name", res.data.data.name);
+
+                console.log(`Id: ${sessionStorage.getItem("id")}`);
+                console.log(`Name: ${sessionStorage.getItem("name")}`);
 
                 window.alert("Successfully logged in");
 
