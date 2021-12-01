@@ -1,24 +1,47 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
 
-//import styled from "styled-components";
-
 class home extends Component {
+
     render() {
-        return(
-            <div>
-                <h1>
-                    Home Page!
-                </h1>
+        const loggedIn = sessionStorage.getItem("logged-in");
+
+        if (loggedIn === null) {
+            return(
                 <div>
-                    <Link to="/CreatePost">
-                        <button type="button">
-                            Create Post
-                        </button>
-                    </Link>
+                    <h1>
+                        Home Page!
+                    </h1>
+                    <div>
+                        <Link to="/CreatePost">
+                            <button type="button">
+                                Create Post
+                            </button>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        else {
+            return(
+                <div>
+                    <h1>
+                        Home Page!
+                    </h1>
+                    <h1>
+                        Logged In!
+                    </h1>
+                    <div>
+                        <Link to="/CreatePost">
+                            <button type="button">
+                                Create Post
+                            </button>
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 

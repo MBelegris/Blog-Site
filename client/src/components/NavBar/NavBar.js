@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Nav,
     NavLink,
@@ -8,10 +8,18 @@ import {
     NavBtnLink,
 } from './NavBarElements';
 
-const NavBar = (logged_in) => {
+const NavBar = () => {
 
-    //const loggedIn = sessionStorage.getItem("logged-in");
-    console.log(sessionStorage.getItem("logged-in"));
+    const [logged_in, setLogged_in] = useState({});
+
+    useEffect(() => {
+
+        setInterval(() => {
+            const logIn = sessionStorage.getItem("logged-in");
+            setLogged_in(logIn);
+        });
+    });
+
     if (logged_in === "True"){
         return (
             <div>

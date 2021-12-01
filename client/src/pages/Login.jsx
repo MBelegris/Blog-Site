@@ -26,16 +26,9 @@ class Login extends Component{
 
         await apis.getUser(username, password)
             .then(res => {
-                //(res.data.data.{id, username, pwd})
-                console.log(`Logged-in: ${sessionStorage.getItem("logged-in")}`);
-
                 sessionStorage.setItem("logged-in", "True");
                 sessionStorage.setItem("id", res.data.data._id);
                 sessionStorage.setItem("name", res.data.data.name);
-
-                console.log(`Id: ${sessionStorage.getItem("id")}`);
-                console.log(`Name: ${sessionStorage.getItem("name")}`);
-                console.log(`Logged-in: ${sessionStorage.getItem("logged-in")}`);
 
                 window.alert("Successfully logged in");
 
