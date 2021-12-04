@@ -35,7 +35,7 @@ const NavBar = () => {
                         </NavLink>
                     </NavMenu>
                     <NavBtn>
-                        <NavBtnLink to="/">View Account</NavBtnLink>
+                        <NavBtnLink to="/viewAccount">View Account</NavBtnLink>
                     </NavBtn>
                 </Nav>
             </div>

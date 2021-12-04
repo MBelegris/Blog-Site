@@ -28,9 +28,9 @@ class Login extends Component{
             .then(res => {
                 sessionStorage.setItem("logged-in", "True");
                 sessionStorage.setItem("id", res.data.data._id);
-                sessionStorage.setItem("name", res.data.data.name);
+                sessionStorage.setItem("username", res.data.data.username);
 
-                window.alert("Successfully logged in");
+                window.alert("Successfully logged in "+sessionStorage.getItem("username"));
 
         }).catch(err => {
             console.log(`${err}`);

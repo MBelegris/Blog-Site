@@ -7,7 +7,6 @@ class createPost extends Component{
         this.state = {
             title: "",
             content: "",
-            author: "User",
         }
     }
 
@@ -22,15 +21,19 @@ class createPost extends Component{
     }
 
     handleCreatePost = async () => {
-        const {title, content, author} = this.state;
+        const {title, content} = this.state;
+
+        let author = sessionStorage.getItem("username");
+        if (author===null){
+            author = "anonymous";
+        }
+
         //example: time,date-> 25/11/2021 at 11:23
         const date = new Date();
         const datePosted = date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + " at " +
             date.getHours() + ":" + date.getMinutes();
 
         const payload = {title, content, author, datePosted};
-
-        console.log(`date posted ${payload}`);
 
         await apis.insertPost(payload).then(res => {
             window.alert("Successfully created a Post");
