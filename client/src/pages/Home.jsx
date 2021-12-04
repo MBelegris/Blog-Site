@@ -26,9 +26,8 @@ class home extends Component {
         // title, content, author, datePosted
         posts.forEach((post) => {
             let li = document.createElement("li");
-            li.innerText = post.title + "\n" + post.content + "\n" + post.author + "\n" + post.datePosted + "\n\n" ;
-            //li.innerText = post;
-            console.log(post);
+            let text = post.title + "\n" + post.content + "\n" + post.author + "\n" + post.datePosted + "\n\n";
+            li.innerText = text;
             list.appendChild(li);
         });
     }

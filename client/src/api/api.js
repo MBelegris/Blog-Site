@@ -27,9 +27,6 @@ const apis = {
     getUserById,
     insertPost,
     getAllPosts,
-    // updatePostById,
-    // deletePostById,
-    // getPostById
 }
 
 export default apis;
