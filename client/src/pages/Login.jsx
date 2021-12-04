@@ -51,7 +51,7 @@ class Login extends Component{
                     <label>Password: </label>
                     <input type="text" placeholder="pwd" onChange={this.handleChangePassword}/>
                 </div>
-                <button type="submit" onClick={this.handleCheckUser}>Register</button>
+                <button type="submit" onClick={this.handleCheckUser}>Login</button>
             </div>
         );
     }
