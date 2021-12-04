@@ -10,6 +10,9 @@ export const insertPost = payload => api.post(`/post`, payload);
 
 export const getUser = (username, password) => api.get(`/users/${username}/${password}`);
 
+export const getAllPosts = () => api.get(`/posts/`);
+
+
 const apis = {
     insertUser,
     getUser,
@@ -17,7 +20,7 @@ const apis = {
     // deleteUserById,
     // getUserById,
     insertPost,
-    // getAllPosts,
+    getAllPosts,
     // updatePostById,
     // deletePostById,
     // getPostById
