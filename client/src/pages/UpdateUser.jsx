@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import apis from "../api/api";
-import {Link} from "react-router-dom";
-//import styled from "styled-components";
 
-class register extends Component {
+class UpdateUser extends Component {
 
     constructor(props) {
         super(props);
@@ -12,75 +10,96 @@ class register extends Component {
             dob: "",
             phone: "",
             username: "",
-            password: "",
+            password: ""
         }
+    }
+
+    componentDidMount = async () => {
+        const user = await apis.getUserById(sessionStorage.getItem("id"));
+
+        this.setState({
+            name: user.data.data.name,
+            dob: user.data.data.dob,
+            phone: user.data.data.phone,
+            username: user.data.data.username,
+            password: user.data.data.password,
+        });
     }
 
     handleChangeName = async event => {
         const name = event.target.value;
         this.setState({name});
     }
+
     handleChangeDob = async event => {
         const dob = event.target.value;
         this.setState({dob});
     }
+
     handleChangePhone = async event => {
         const phone = event.target.value;
         this.setState({phone});
     }
+
     handleChangeUsername = async event => {
         const username = event.target.value;
         this.setState({username});
     }
+
     handleChangePassword = async event => {
         const password = event.target.value;
         this.setState({password});
     }
 
-    handleCreateUser = async () => {
+    handleUpdateUser = async () => {
         const { name, dob, phone, username, password} = this.state;
+
+        const id = sessionStorage.getItem("id");
         const payload = { name, dob, phone, username, password};
 
-        await apis.insertUser(payload).then( res => {
-            window.alert(`User added successfully`);
+        await apis.updateUserById(id, payload).then(res => {
+            window.alert(`Successfully updated details: ${name}`);
             this.setState({
                 name: "",
-                dob: "",
                 phone: "",
+                dob: "",
                 username: "",
                 password: ""
-                }
-            );
+            });
         });
+        window.location.href = `/viewAccount`;
     }
 
     render() {
-        return(
+
+        const {name, dob, phone, username, password} = this.state;
+
+        return (
             <div>
-                <h1>Register Page!</h1>
+                <h1>Update User Page!</h1>
                 <br/>
                 <label>Name: </label>
-                <input type="text" placeholder="name" onChange={this.handleChangeName}/>
+                <input type="text" placeholder="name" value={name} onChange={this.handleChangeName}/>
                 <br/>
                 <label>Date of Birth: </label>
-                <input type="text" placeholder="dob" onChange={this.handleChangeDob}/>
+                <input type="text" placeholder="dob" value={dob} onChange={this.handleChangeDob}/>
                 <br/>
                 <label>Phone Number: </label>
-                <input type="text" placeholder="phone" onChange={this.handleChangePhone}/>
+                <input type="text" placeholder="phone" value={phone} onChange={this.handleChangePhone}/>
                 <br/>
                 <label>Username: </label>
-                <input type="text" placeholder="username" onChange={this.handleChangeUsername}/>
+                <input type="text" placeholder="username" value={username} onChange={this.handleChangeUsername}/>
                 <br/>
                 <label>Password: </label>
-                <input type="text" placeholder="pwd" onChange={this.handleChangePassword}/>
+                <input type="text" placeholder="pwd" value={password} onChange={this.handleChangePassword}/>
                 <br/>
-                <button onClick={this.handleCreateUser}>Register</button>
+                <button onClick={this.handleUpdateUser}>Update</button>
                 <br/>
-                <br/>
-                <Link to="/login" className="btn btn-primary">Sign In</Link>
             </div>
         );
     }
+
+
 }
 
-export default register;
+export default UpdateUser;
