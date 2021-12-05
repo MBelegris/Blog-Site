@@ -55,6 +55,7 @@ class register extends Component {
                         password: ""
                     }
                 );
+                window.location.href = '/login';
             }
         });
     }
@@ -82,7 +83,7 @@ class register extends Component {
                 <button onClick={this.handleCreateUser}>Register</button>
                 <br/>
                 <br/>
-                <Link to="/login" className="btn btn-primary">Sign In</Link>
+                <Link to="/login">Sign In</Link>
             </div>
         );
     }

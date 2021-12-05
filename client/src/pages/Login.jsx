@@ -31,8 +31,9 @@ class Login extends Component{
                 sessionStorage.setItem("username", res.data.data.username);
 
                 window.alert("Successfully logged in "+sessionStorage.getItem("username"));
+                window.location.href = '/viewAccount';
 
-        }).catch(err => {
+            }).catch(err => {
             console.log(`${err}`);
         });
     }
