@@ -1,7 +1,7 @@
 const User = require('../models/user-model');
 const logger = require('../Logger');
 
-createUser = (req, res) => {
+createUser = async (req, res) => {
     logger.info('Attempting user creation');
     const body = req.body;
 
@@ -14,19 +14,27 @@ createUser = (req, res) => {
 
     if (!user) {
         logger.error(`Failed user creation: ${err}`);
-        return res.status(400).json({ success: false, error: err });
+        return res.status(400).json({success: false, error: err});
     }
 
-    user
-        .save()
-        .then(() => {
-            logger.info('Successful user creation');
-            return res.status(201).json({success: true, id: user._id, message: 'User created!'});
-        })
-        .catch(error => {
-            logger.error(`Failed user creation`);
-            return res.status(400).json({error, message: 'User not created!'});
-        })
+    await User.findOne({username: body.username}, (err, userCheck) => {
+
+        if (!userCheck) {
+            user
+                .save()
+                .then(() => {
+                    logger.info('Successful user creation');
+                    return res.status(201).json({success: true, id: user._id, message: 'User created!'});
+                })
+                .catch(error => {
+                    logger.error(`Failed user creation`);
+                    return res.status(400).json({error, message: 'User not created!'});
+                });
+        } else {
+            logger.error(`Failed user creation, username already exists`);
+            return res.status(201).json({success: false, message: 'User not created, username already exists!'});
+        }
+    });
 }
 
 updateUser = async (req, res) => {
@@ -48,6 +56,7 @@ updateUser = async (req, res) => {
         user.phone = body.phone;
         user.username = body.username;
         user.password = body.password;
+
         user
             .save()
             .then(() => {
@@ -57,8 +66,8 @@ updateUser = async (req, res) => {
             .catch(error => {
                 logger.error('Failed to update user');
                 return res.status(404).json({error, message: 'User not updated!'});
-            })
-    })
+            });
+    });
 }
 
 deleteUser = async (req, res) => {
@@ -103,17 +112,23 @@ getUserById = async (req, res) => {
 }
 
 getUserByUsernamePwd = async (req, res) => {
+    logger.info("Attempting to find user by Username and Password");
     await User.findOne({ username: req.params.username, password: req.params.password }, (err, user) => {
         if (err) {
+            logger.error(`Failed to find user: ${err}`);
             return res.status(400).json({ success: false, error: err });
         }
 
         if (!user) {
+            logger.error(`Failed to find user: User not found`);
             return res.status(404).json({ success: false, error: `User not found` });
         }
-        console.log(`${user}`)
+        logger.info("Found user");
         return res.status(200).json({ success: true, data: user });
-    }).catch(err => console.log(err));
+    }).catch(err => {
+        logger.error(`Failed to find user: ${err}`);
+        console.log(err);
+    });
 }
 
 getUsers = async (req, res) => {
