@@ -1,5 +1,6 @@
 const User = require('../models/user-model');
 const logger = require('../Logger');
+const bcrypt = require('bcryptjs');
 
 createUser = async (req, res) => {
     logger.info('Attempting user creation');
@@ -27,7 +28,8 @@ createUser = async (req, res) => {
                     return res.status(201).json({success: true, id: user._id, message: 'User created!'});
                 })
                 .catch(error => {
-                    logger.error(`Failed user creation`);
+                    console.log("Hello World");
+                    logger.error(`Failed user creation: ${error}`);
                     return res.status(400).json({error, message: 'User not created!'});
                 });
         } else {
@@ -113,7 +115,7 @@ getUserById = async (req, res) => {
 
 getUserByUsernamePwd = async (req, res) => {
     logger.info("Attempting to find user by Username and Password");
-    await User.findOne({ username: req.params.username, password: req.params.password }, (err, user) => {
+    await User.findOne({ username: req.params.username}, (err, user) => {
         if (err) {
             logger.error(`Failed to find user: ${err}`);
             return res.status(400).json({ success: false, error: err });
@@ -124,7 +126,17 @@ getUserByUsernamePwd = async (req, res) => {
             return res.status(404).json({ success: false, error: `User not found` });
         }
         logger.info("Found user");
-        return res.status(200).json({ success: true, data: user });
+        bcrypt.compare(req.params.password, user.password).then(check => {
+            if (check){
+                logger.info("Successfully got user");
+                return res.status(200).json({ success: true, data: user });
+            }
+            else {
+                logger.error("Found user but incorrect Password");
+                return res.status(200).json({ success: false, error: "Incorrect Password" });
+            }
+        });
+
     }).catch(err => {
         logger.error(`Failed to find user: ${err}`);
         console.log(err);

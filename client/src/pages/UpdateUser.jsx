@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import apis from "../api/api";
+const bcrypt = require('bcryptjs');
 
 class UpdateUser extends Component {
 
@@ -55,24 +56,27 @@ class UpdateUser extends Component {
         const { name, dob, phone, username, password} = this.state;
 
         const id = sessionStorage.getItem("id");
-        const payload = { name, dob, phone, username, password};
 
-        await apis.updateUserById(id, payload).then(res => {
-            window.alert(`Successfully updated details: ${name}`);
-            this.setState({
-                name: "",
-                phone: "",
-                dob: "",
-                username: "",
-                password: ""
+        bcrypt.hash(password, 5, async (error, password) => {
+            const payload = { name, dob, phone, username, password};
+
+            await apis.updateUserById(id, payload).then(res => {
+                window.alert(`Successfully updated details: ${name}`);
+                this.setState({
+                    name: "",
+                    phone: "",
+                    dob: "",
+                    username: "",
+                    password: ""
+                });
             });
+            window.location.href = `/viewAccount`;
         });
-        window.location.href = `/viewAccount`;
     }
 
     render() {
 
-        const {name, dob, phone, username, password} = this.state;
+        const {name, dob, phone, username} = this.state;
 
         return (
             <div>
@@ -91,7 +95,7 @@ class UpdateUser extends Component {
                 <input type="text" placeholder="username" value={username} onChange={this.handleChangeUsername}/>
                 <br/>
                 <label>Password: </label>
-                <input type="text" placeholder="pwd" value={password} onChange={this.handleChangePassword}/>
+                <input type="text" placeholder="pwd" onChange={this.handleChangePassword}/>
                 <br/>
                 <button onClick={this.handleUpdateUser}>Update</button>
                 <br/>

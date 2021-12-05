@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import apis from "../api/api";
 import {Link} from "react-router-dom";
-//import styled from "styled-components";
+
+const bcrypt = require('bcryptjs');
 
 class register extends Component {
 
@@ -39,24 +40,26 @@ class register extends Component {
 
     handleCreateUser = async () => {
         const { name, dob, phone, username, password} = this.state;
-        const payload = { name, dob, phone, username, password};
 
-        await apis.insertUser(payload).then( res => {
-            if (res.data.success === false) {
-                window.alert(`Failed to add user:\n${res.data.message}`);
-            }
-            else{
-                window.alert(`User added successfully`);
-                this.setState({
-                        name: "",
-                        dob: "",
-                        phone: "",
-                        username: "",
-                        password: ""
-                    }
-                );
-                window.location.href = '/login';
-            }
+        bcrypt.hash(password, 5, async (error, password) => {
+            const payload = {name, dob, phone, username, password};
+
+            await apis.insertUser(payload).then(res => {
+                if (res.data.success === false) {
+                    window.alert(`Failed to add user:\n${res.data.message}`);
+                } else {
+                    window.alert(`User added successfully`);
+                    this.setState({
+                            name: "",
+                            dob: "",
+                            phone: "",
+                            username: "",
+                            password: ""
+                        }
+                    );
+                    window.location.href = '/login';
+                }
+            });
         });
     }
 

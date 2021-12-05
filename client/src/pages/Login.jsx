@@ -34,8 +34,8 @@ class Login extends Component{
                 window.location.href = '/viewAccount';
 
             }).catch(err => {
-            console.log(`${err}`);
-        });
+                console.log(`${err}`);
+            });
     }
 
     render() {

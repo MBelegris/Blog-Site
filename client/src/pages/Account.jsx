@@ -51,7 +51,7 @@ class Account extends Component {
             });
             sessionStorage.setItem("logged-in", null);
             sessionStorage.setItem("id", null);
-            sessionStorage.setItem("username", null);
+            sessionStorage.setItem("username", "anonymous");
         });
     }
 
@@ -60,7 +60,7 @@ class Account extends Component {
     }
 
     render() {
-        const {name, dob, phone, username, password} = this.state;
+        const {name, dob, phone, username} = this.state;
         return (
             <div>
                 <h1>
@@ -72,7 +72,6 @@ class Account extends Component {
                     <p>Date of Birth: {dob}</p>
                     <p>Phone: {phone}</p>
                     <p>Username: {username}</p>
-                    <p>Password: {password}</p>
                 </div>
                 <br/>
                 <button type="submit" onClick={this.logout}>Logout</button>
