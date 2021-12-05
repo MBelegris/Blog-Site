@@ -42,15 +42,20 @@ class register extends Component {
         const payload = { name, dob, phone, username, password};
 
         await apis.insertUser(payload).then( res => {
-            window.alert(`User added successfully`);
-            this.setState({
-                name: "",
-                dob: "",
-                phone: "",
-                username: "",
-                password: ""
-                }
-            );
+            if (res.data.success === false) {
+                window.alert(`Failed to add user:\n${res.data.message}`);
+            }
+            else{
+                window.alert(`User added successfully`);
+                this.setState({
+                        name: "",
+                        dob: "",
+                        phone: "",
+                        username: "",
+                        password: ""
+                    }
+                );
+            }
         });
     }
 
