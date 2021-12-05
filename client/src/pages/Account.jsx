@@ -37,7 +37,7 @@ class Account extends Component {
         });
         sessionStorage.setItem("logged-in", null);
         sessionStorage.setItem("id", null);
-        sessionStorage.setItem("username", null);
+        sessionStorage.setItem("username", "anonymous");
     }
 
     deleteAccount = async () => {
