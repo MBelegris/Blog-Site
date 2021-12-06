@@ -64,5 +64,6 @@ containerise the three images used in the project.
      - https://expressjs.com/
    - React for the frontend: 
      - https://reactjs.org/
-2. Docker: https://www.docker.com/
+2. Docker:
+    - https://www.docker.com/
 
