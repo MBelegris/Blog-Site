@@ -57,10 +57,12 @@ containerise the three images used in the project.
 ## Technology Used
 
 1. MERN Stack:
-   - MongoDB as a database: https://www.mongodb.com/
+   - MongoDB as a database: 
+     - https://www.mongodb.com/
    - Express and Node for the backend: 
      - https://nodejs.org/en/
      - https://expressjs.com/
-   - React for the frontend: https://reactjs.org/
+   - React for the frontend: 
+     - https://reactjs.org/
 2. Docker: https://www.docker.com/
 
