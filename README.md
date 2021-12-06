@@ -2,8 +2,6 @@
 
 ## Project Description
 
----
-
 Blog-Site is a website. On this website Users will be able to read Posts made by other
 users as well as create their own posts. To do this, Users can press the create post button
 which will take them to the Create Post page and will be able to make a post with a title.
@@ -15,7 +13,6 @@ permanently remove their account with the database.
 
 ## How to Run the Project
 
----
 Currently, to run the project it is required that on your local machine you:
 1. Build the client docker image by running in ./client 
 > docker build -t "react-app" .
@@ -28,8 +25,6 @@ Currently, to run the project it is required that on your local machine you:
 5. To view the website navigate to: http://localhost:3000
 
 ## Project Structure
-
---- 
 
 The project is set up into two different directories: Client and Server
 
@@ -60,8 +55,6 @@ Outside these two directories the docker-compose.yml file exists which is used t
 containerise the three images used in the project.
 
 ## Technology Used
-
----
 
 1. MERN Stack:
    - MongoDB as a database: https://www.mongodb.com/
