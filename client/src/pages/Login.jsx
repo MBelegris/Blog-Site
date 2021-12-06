@@ -26,13 +26,17 @@ class Login extends Component{
 
         await apis.getUser(username, password)
             .then(res => {
-                sessionStorage.setItem("logged-in", "True");
-                sessionStorage.setItem("id", res.data.data._id);
-                sessionStorage.setItem("username", res.data.data.username);
+                if (res.data.success === false){
+                    window.alert(`Failed to log in: ${res.data.error}`);
+                }
+                else{
+                    sessionStorage.setItem("logged-in", "True");
+                    sessionStorage.setItem("id", res.data.data._id);
+                    sessionStorage.setItem("username", res.data.data.username);
 
-                window.alert("Successfully logged in "+sessionStorage.getItem("username"));
-                window.location.href = '/viewAccount';
-
+                    window.alert("Successfully logged in "+sessionStorage.getItem("username"));
+                    window.location.href = '/viewAccount';
+                }
             }).catch(err => {
                 console.log(`${err}`);
             });

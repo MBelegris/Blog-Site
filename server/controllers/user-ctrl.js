@@ -118,12 +118,12 @@ getUserByUsernamePwd = async (req, res) => {
     await User.findOne({ username: req.params.username}, (err, user) => {
         if (err) {
             logger.error(`Failed to find user: ${err}`);
-            return res.status(400).json({ success: false, error: err });
+            return res.status(200).json({ success: false, error: err });
         }
 
         if (!user) {
             logger.error(`Failed to find user: User not found`);
-            return res.status(404).json({ success: false, error: `User not found` });
+            return res.status(200).json({ success: false, error: `User not found` });
         }
         logger.info("Found user");
         bcrypt.compare(req.params.password, user.password).then(check => {
