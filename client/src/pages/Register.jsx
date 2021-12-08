@@ -72,16 +72,16 @@ class register extends Component {
                 <input type="text" placeholder="name" onChange={this.handleChangeName}/>
                 <br/>
                 <label>Date of Birth: </label>
-                <input type="text" placeholder="dob" onChange={this.handleChangeDob}/>
+                <input type="date" placeholder="dob" onChange={this.handleChangeDob}/>
                 <br/>
                 <label>Phone Number: </label>
-                <input type="text" placeholder="phone" onChange={this.handleChangePhone}/>
+                <input type="tel" placeholder="phone" onChange={this.handleChangePhone}/>
                 <br/>
                 <label>Username: </label>
                 <input type="text" placeholder="username" onChange={this.handleChangeUsername}/>
                 <br/>
                 <label>Password: </label>
-                <input type="text" placeholder="pwd" onChange={this.handleChangePassword}/>
+                <input type="password" placeholder="password" onChange={this.handleChangePassword}/>
                 <br/>
                 <button onClick={this.handleCreateUser}>Register</button>
                 <br/>
