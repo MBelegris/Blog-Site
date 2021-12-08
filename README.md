@@ -55,7 +55,7 @@ as the log.log which holds the logs of the activities
 Outside these two directories the docker-compose.yml file exists which is used to 
 containerise the three images used in the project.
 
-## Technology Used
+## Technologies Used
 
 1. MERN Stack:
    - MongoDB as a database: 
@@ -67,6 +67,13 @@ containerise the three images used in the project.
      - https://reactjs.org/
 2. Docker:
     - https://www.docker.com/
+3. Mocha and Chai for testing
+    - https://mochajs.org/
+    - https://www.chaijs.com/
+4. Winston as a logger
+    - https://github.com/winstonjs/winston
+5. NGINX as a load balancer and reverse proxy
+    - https://www.nginx.com/
 
 ## Testing
 

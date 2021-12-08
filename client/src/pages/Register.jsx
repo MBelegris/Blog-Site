@@ -17,27 +17,39 @@ class register extends Component {
         }
     }
 
+    // Will trigger everytime the user changes the name value
     handleChangeName = async event => {
         const name = event.target.value;
         this.setState({name});
     }
+    // Will trigger everytime the user changes the dob value
     handleChangeDob = async event => {
         const dob = event.target.value;
         this.setState({dob});
     }
+    // Will trigger everytime the user changes the phone value
     handleChangePhone = async event => {
         const phone = event.target.value;
         this.setState({phone});
     }
+    // Will trigger everytime the user changes the username value
     handleChangeUsername = async event => {
         const username = event.target.value;
         this.setState({username});
     }
+    // Will trigger everytime the user changes the password value
     handleChangePassword = async event => {
         const password = event.target.value;
         this.setState({password});
     }
 
+    /*
+        Will hash the value of the password
+        Sends what the user entered as well as the hashed password to the backend
+        Receives either success is true or false
+        If it is a Success then it redirects the user to the login page to Login
+        Otherwise it outputs that it failed to add user
+     */
     handleCreateUser = async () => {
         const { name, dob, phone, username, password} = this.state;
 

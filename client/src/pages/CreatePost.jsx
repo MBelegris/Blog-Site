@@ -9,17 +9,24 @@ class createPost extends Component{
             content: "",
         }
     }
-
+    // will trigger everytime the input box for the title is changed, i.e. when the user enters the title
     handleChangeTitle = async event => {
         const title = event.target.value;
         this.setState({title});
     }
 
+    // will trigger everytime the input box for the content is changed, i.e. when the user enters the content of the post
     handleChangeContent = async event => {
         const content = event.target.value;
         this.setState({content});
     }
 
+    /*
+        Will Create the Post to be sent to the backend
+        It determines whether the author is logged-in so that it can use the username as the author
+        Gets the current date and time
+        Sends the payload to insertPost and then redirects user to the home page
+     */
     handleCreatePost = async () => {
         const {title, content} = this.state;
 
@@ -41,6 +48,7 @@ class createPost extends Component{
                 title: "",
                 content:""
             });
+            window.location.href = "/";
         }).catch(error => {
             console.log(error);
         })

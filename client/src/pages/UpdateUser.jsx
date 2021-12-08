@@ -15,6 +15,7 @@ class UpdateUser extends Component {
         }
     }
 
+    // Sets the values of the users values based on the id saved in session storage so that the user can modify them
     componentDidMount = async () => {
         const user = await apis.getUserById(sessionStorage.getItem("id"));
 
@@ -26,32 +27,40 @@ class UpdateUser extends Component {
             password: user.data.data.password,
         });
     }
-
+    // Will trigger everytime the user changes the name value
     handleChangeName = async event => {
         const name = event.target.value;
         this.setState({name});
     }
 
+    // Will trigger everytime the user changes the dob value
     handleChangeDob = async event => {
         const dob = event.target.value;
         this.setState({dob});
     }
 
+    // Will trigger everytime the user changes the phone value
     handleChangePhone = async event => {
         const phone = event.target.value;
         this.setState({phone});
     }
 
+    // Will trigger everytime the user changes the username value
     handleChangeUsername = async event => {
         const username = event.target.value;
         this.setState({username});
     }
 
+    // Will trigger everytime the user changes the password value
     handleChangePassword = async event => {
         const password = event.target.value;
         this.setState({password});
     }
 
+    /*
+        Hashes the password so that it can be sent to the backend
+        Alerts success once a response is found and redirects the user back to viewAccount
+     */
     handleUpdateUser = async () => {
         const { name, dob, phone, username, password} = this.state;
 

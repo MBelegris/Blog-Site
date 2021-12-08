@@ -38,6 +38,7 @@ updatePost = async (req,res) => {
         return res.status(400).json( { success: false, error: "You must provide a Post"});
     }
 
+    // looks for a post with the id received in the request
     Post.findOne( {_id: req.params.id}, (err, post) => {
         if (err) {
             logger.error(`Failed Post Creation: Post Not Found`);
@@ -104,8 +105,8 @@ getPostById = async (req,res) => {
             logger.error(`Failed to Get Post By ID: Post Not Found`);
             return res.status(404).json({ success: false, error: `Post not found` });
         }
-        logger.info(`Successfully got Post By ID`);
 
+        logger.info(`Successfully got Post By ID`);
         return res.status(200).json({ success: true, data: post });
     }).catch(err => {
         logger.error(`Failed to Get Post By ID: ${err}`);
