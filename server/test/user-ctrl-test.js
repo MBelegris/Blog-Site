@@ -44,9 +44,9 @@ describe('Testing the user CRUD', function () {
     it('should be valid if it can create a user in the db', function (done){
 
         var user = new User({
-            name: "Test-user",
-            username: "test-username",
-            password: "Test-pwd"
+            name: "Test-name",
+            username: "test-user-username",
+            password: "Test-user-pwd"
         });
 
         chai.request('http://localhost:5000/api/user')
@@ -87,9 +87,21 @@ describe('Testing the user CRUD', function () {
             })
     });
 
+    // test get user by username and password
+    // it('should get user by username and password', function (done) {
+    //    chai.request(`http://localhost:5000/api/users/test-user-username/Test-user-pwd`)
+    //        .get('/')
+    //        .then(function (res, err) {
+    //            expect(res).to.have.status(200);
+    //            done();
+    //        }).catch(function (err) {
+    //        throw err;
+    //    })
+    // });
+
     //test update user
     it('should be valid if it can update user', function (done) {
-        var user = new User({
+        let user = new User({
             name: "New-test User",
             username: "test-username",
             password: "Test-pwd"
