@@ -45,6 +45,7 @@ The server directory contains all the files based around the backend of the webs
 - Database: Connects to the database
 - Logger: contains a file with the code used to Log activity on the backend as well
 as the log.log which holds the logs of the activities
+- Models: contains the model schema for the User and for Post
 - Routes: contains two files post-router.js and user-router.js:
   - Post-router: contains the REST endpoints for posts
   - User-router: contains teh REST endpoints for users
@@ -67,3 +68,8 @@ containerise the three images used in the project.
 2. Docker:
     - https://www.docker.com/
 
+## Testing
+
+The test folder in Server contains the only tests for this project- they test the functions
+in user-ctrl.js and post-ctrl.js. It is required that when pushing to the Main branch or 
+doing a pull request into the Main branch that these tests pass. 
