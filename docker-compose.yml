@@ -37,7 +37,7 @@ services:
       - api-server
     container_name: "react-app"
 
-  proxy:
+  nginx-proxy:
     image: nginx
     depends_on:
       - api-server
@@ -47,6 +47,7 @@ services:
       - mern-app
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    container_name: "nginx-proxy"
 
 networks:
   mern-app:
