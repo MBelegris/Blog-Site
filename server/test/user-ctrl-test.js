@@ -1,5 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const bcrypt = require('bcryptjs');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
@@ -26,9 +27,9 @@ describe('Testing the user CRUD', function () {
     });
 
     it('should be valid if name, username and pwd are not null', function (done) {
-        var user = new User({
+        let user = new User({
             name: "bob",
-            username: "boober",
+            username: "bober",
             password: "pwd"
         });
 
@@ -43,22 +44,27 @@ describe('Testing the user CRUD', function () {
     //Test user creation
     it('should be valid if it can create a user in the db', function (done){
 
-        var user = new User({
-            name: "Test-name",
-            username: "test-user-username",
-            password: "Test-user-pwd"
-        });
+        let name = "Test-name";
+        let username = "test-user-username";
+        let password= "Test-user-pwd";
 
-        chai.request('http://localhost:8000/api/user')
-            .post('/')
-            .set('content-type', 'application/json')
-            .send(user)
-            .then(function (res, err) {
-                test_id = res.body.id;
-                expect(res.status).to.equal(201);
-                done();
-            }).catch(function (err) {
-            throw err;
+        bcrypt.hash(password, 5, async  (error, password) => {
+            let user = new User({
+                name: name,
+                username: username,
+                password: password
+            });
+            chai.request('http://localhost:8000/api/user')
+                .post('/')
+                .set('content-type', 'application/json')
+                .send(user)
+                .then(function (res, err) {
+                    test_id = res.body.id;
+                    expect(res.status).to.equal(201);
+                    done();
+                }).catch(function (err) {
+                throw err;
+            });
         });
     });
 
@@ -88,16 +94,17 @@ describe('Testing the user CRUD', function () {
     });
 
     // test get user by username and password
-    // it('should get user by username and password', function (done) {
-    //    chai.request(`http://localhost:8000/api/users/test-user-username/Test-user-pwd`)
-    //        .get('/')
-    //        .then(function (res, err) {
-    //            expect(res).to.have.status(200);
-    //            done();
-    //        }).catch(function (err) {
-    //        throw err;
-    //    })
-    // });
+    it('should get user by username and password', function (done) {
+       chai.request(`http://localhost:8000/api/users/test-user-username/Test-user-pwd`)
+           .get('/')
+           .then(function (res, err) {
+               expect(res).to.have.status(200);
+               expect(res.body.success).to.equal(true);
+               done();
+           }).catch(function (err) {
+           throw err;
+       })
+    });
 
     //test update user
     it('should be valid if it can update user', function (done) {
