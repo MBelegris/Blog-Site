@@ -54,7 +54,7 @@ describe('Testing the post CRUD', function () {
             datePosted: "Test date"
         });
 
-        chai.request('http://localhost:5000/api/post')
+        chai.request('http://localhost:8000/api/post')
             .post('/')
             .set('content-type', 'application/json')
             .send(post)
@@ -69,7 +69,7 @@ describe('Testing the post CRUD', function () {
 
     //test the get all posts function
     it('should be valid if it can get back all the posts from the db', function (done){
-        chai.request('http://localhost:5000/api/posts')
+        chai.request('http://localhost:8000/api/posts')
             .get('/')
             .then(function (res,err) {
                 expect(res).to.have.status(200);
@@ -82,7 +82,7 @@ describe('Testing the post CRUD', function () {
 
     //test get post by id
     it('should be valid if it can get post by id', function (done) {
-        chai.request(`http://localhost:5000/api/post/${test_id}`)
+        chai.request(`http://localhost:8000/api/post/${test_id}`)
             .get('/')
             .then(function (res, err) {
                 expect(res).to.have.status(200);
@@ -101,7 +101,7 @@ describe('Testing the post CRUD', function () {
             datePosted: "Test date"
         });
 
-        chai.request(`http://localhost:5000/api/post/${test_id}`)
+        chai.request(`http://localhost:8000/api/post/${test_id}`)
             .put('/')
             .set('content-type', 'application/json')
             .send(post)
@@ -115,7 +115,7 @@ describe('Testing the post CRUD', function () {
 
     //test delete post by id
     it('should be valid if it can delete post by id', function (done) {
-        chai.request(`http://localhost:5000/api/post/${test_id}`)
+        chai.request(`http://localhost:8000/api/post/${test_id}`)
             .delete('/')
             .then(function (res, err) {
                 expect(res).to.have.status(200);

@@ -49,7 +49,7 @@ describe('Testing the user CRUD', function () {
             password: "Test-user-pwd"
         });
 
-        chai.request('http://localhost:5000/api/user')
+        chai.request('http://localhost:8000/api/user')
             .post('/')
             .set('content-type', 'application/json')
             .send(user)
@@ -64,7 +64,7 @@ describe('Testing the user CRUD', function () {
 
     //test the get all users function
     it('should be valid if it can get back all the users from the db', function (done){
-        chai.request('http://localhost:5000/api/users')
+        chai.request('http://localhost:8000/api/users')
             .get('/')
             .then(function (res,err) {
                 expect(res).to.have.status(200);
@@ -77,7 +77,7 @@ describe('Testing the user CRUD', function () {
 
     //test get user by id
     it('should get user by id', function (done) {
-        chai.request(`http://localhost:5000/api/user/${test_id}`)
+        chai.request(`http://localhost:8000/api/user/${test_id}`)
             .get('/')
             .then(function (res, err) {
                 expect(res).to.have.status(200);
@@ -89,7 +89,7 @@ describe('Testing the user CRUD', function () {
 
     // test get user by username and password
     // it('should get user by username and password', function (done) {
-    //    chai.request(`http://localhost:5000/api/users/test-user-username/Test-user-pwd`)
+    //    chai.request(`http://localhost:8000/api/users/test-user-username/Test-user-pwd`)
     //        .get('/')
     //        .then(function (res, err) {
     //            expect(res).to.have.status(200);
@@ -108,7 +108,7 @@ describe('Testing the user CRUD', function () {
         });
 
 
-        chai.request(`http://localhost:5000/api/user/${test_id}`)
+        chai.request(`http://localhost:8000/api/user/${test_id}`)
             .put('/')
             .set('content-type', 'application/json')
             .send(user)
@@ -122,7 +122,7 @@ describe('Testing the user CRUD', function () {
 
     //test delete user by id
     it('should be valid if it can delete user by id', function (done) {
-        chai.request(`http://localhost:5000/api/user/${test_id}`)
+        chai.request(`http://localhost:8000/api/user/${test_id}`)
             .delete('/')
             .then(function (res, err) {
                 expect(res).to.have.status(200);
