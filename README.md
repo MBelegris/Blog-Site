@@ -20,9 +20,11 @@ Currently, to run the project it is required that on your local machine you:
 > docker build -t "api-server" .
 3. Pull the mongodb image by running (if you do not already have a mongodb image)
 > docker pull mongo
-4. Run the docker compose file by running in the main folder
+4. Pull the nginx image by running (if you do not already have a nginx image)
+> docker pull nginx
+5. Run the docker compose file by running in the main folder
 > docker compose up
-5. To view the website navigate to: http://localhost:3000
+6. To view the website navigate to: http://localhost:3000
 
 ## Project Structure
 
